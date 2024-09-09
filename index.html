@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VOTER ID</title>
+    <link
+      rel="stylesheet"
+      href="./bootstrap-5.3.3-dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        text-align: center;
+      }
+      .container {
+        background-color: bisque;
+        border-radius: 20px;
+        width: 35vw;
+        padding: 10px;
+        margin-top: 20px;
+      }
+      input {
+        background-color: cornsilk;
+        width: 15vw;
+      }
+      button {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>ENTER YOUR DETAILS &#128071 TO GET VOTER ID &#128077</h2>
+    <div class="container">
+      <form onsubmit="submitForm(event)">
+        <label for="fname"><b>Fisrt Name:</b></label> <br />
+        <input type="text" id="fname" /><br />
+        <label for="lname"><b>Last Name :</b></label> <br />
+        <input type="text" id="lname" /><br />
+        <label for="fatherName"><b>Father Name :</b></label> <br />
+        <input type="text" id="fatherName" /><br />
+        <label for="address"><b>Address :</b></label> <br />
+        <input type="text" id="address" /><br /><br />
+        <input type="file" id="inputFile" /><br /><br />
+        <input type="submit" class="btn btn-primary" />
+      </form>
+    </div>
+    <div id="subContainer"></div>
+    <script>
+      function submitForm(event) {
+        event.preventDefault();
+        let VoterID = document.getElementById("subContainer");
+        document.body.appendChild(VoterID);
+        VoterID.style.backgroundColor = "bisque";
+        VoterID.style.borderRadius = "20px";
+        VoterID.style.padding = "10px";
+        VoterID.style.width = "25vw";
+        VoterID.style.marginTop = "50px";
+        VoterID.classList = "container";
+
+        let titleTop = document.createElement("h3");
+        let titleBottom = document.createElement("h3");
+        titleTop.innerHTML = "ELECTION COMMISSION OF INDIA";
+        titleBottom.innerHTML = "IDENTITY CARD";
+        VoterID.appendChild(titleTop);
+        VoterID.appendChild(titleBottom);
+        titleTop.style.textAlign = "center";
+        titleTop.style.margin = "10px";
+        titleBottom.style.textAlign = "center";
+        titleBottom.style.margin = "10px";
+
+        let image = document.createElement("img");
+        let input = document.getElementById("inputFile");
+        const reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
+        reader.addEventListener("load", (e) => {
+          image.setAttribute("src", e.target.result);
+          image.setAttribute("height", "200");
+          image.setAttribute("width", "150");
+          image.setAttribute("display", "block");
+          image.setAttribute("margin", "auto");
+        });
+        VoterID.appendChild(image);
+
+        let epicID = document.createElement("p");
+        function getRandomId() {
+          let randomNum = "0123456789ABCDEF";
+          let randomId = "";
+          for (i = 0; i < 10; i++) {
+            randomId += randomNum[Math.floor(Math.random() * 16)];
+          }
+          return randomId;
+        }
+        epicID.innerHTML = "<b>EPIC NUMBER :<b>" + " " + getRandomId();
+        epicID.style.textAlign = "start";
+        epicID.style.marginTop = "10px";
+        VoterID.appendChild(epicID);
+
+        let name = document.createElement("p");
+        let fname = document.getElementById("fname");
+        let lname = document.getElementById("lname");
+        name.innerHTML =
+          "<b>ELECTOR NAME :<b>" + " " + fname.value + " " + lname.value;
+        name.style.textAlign = "start";
+        VoterID.appendChild(name);
+
+        let father = document.createElement("p");
+        let fatherName = document.getElementById("fatherName");
+        father.innerHTML = "<b>FATHER NAME :<b>" + " " + fatherName.value;
+        father.style.textAlign = "start";
+        VoterID.appendChild(father);
+
+        let location = document.createElement("p");
+        let address = document.getElementById("address");
+        location.innerHTML = "<b>ADDRESS :<b>" + " " + address.value;
+        location.style.textAlign = "start";
+        VoterID.appendChild(location);
+      }
+    </script>
+  </body>
+</html>
